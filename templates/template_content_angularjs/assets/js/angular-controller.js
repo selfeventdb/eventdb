@@ -127,7 +127,8 @@ EventDB.controller('rightSidebarController', function($scope, $rootScope, $state
 /* -------------------------------
    4.0 CONTROLLER - Header
 ------------------------------- */
-EventDB.controller('headerController', function($scope, $rootScope, $state, $http) {
+EventDB.controller('headerController', function($scope,$location, $rootScope, $state, $http) {
+
     $http.post("index.php", data={
     "page": "user",
     "function": "get_user",
@@ -151,6 +152,7 @@ EventDB.controller('headerController', function($scope, $rootScope, $state, $htt
    5.0 CONTROLLER - Top Menu
 ------------------------------- */
 EventDB.controller('topMenuController', function($scope, $rootScope, $state) {
+
     setTimeout(function() {
         App.initTopMenu();
     }, 0);
@@ -177,9 +179,19 @@ EventDB.controller('themePanelController', function($scope, $rootScope, $state) 
 
 
 
-EventDB.controller('createDocController', function($scope, $http, $rootScope, $stateParams, $state){
+EventDB.controller('createDocController', function($scope,$location,$window, $http, $rootScope, $stateParams, $state){
 
-    
+    var win = $window;
+    $scope.$watch('docform.$dirty', function(value) {
+      if(value) {
+        win.onbeforeunload = function(){
+          console.log("aaa");
+          
+        };
+      }
+    });
+
+
     $scope.set_team = function(k){
         var i = $scope.zebra_team.indexOf(k.toString())
         if ( i > -1){

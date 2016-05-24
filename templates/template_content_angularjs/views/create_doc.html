@@ -1,4 +1,5 @@
 <div ng-controller="createDocController" class="m-createdoc">
+<form name="docform" novalidate>
     <div class="table-responsive" style="background-color:#fff; padding:10px">
         <table class="table table-bordered">
             <thead>
@@ -9,31 +10,41 @@
             <tr>
                 <td colspan="6"><h6>基本信息</h6></td>
             </tr>
-            <tr><td>项目名称</td><td><input type="text" class="form-control" ng-model="file_name"/></td>
+            <tr><td>项目名称</td><td><input type="text" class="form-control" ng-model="file_name" name="file_name" ng-maxlength="20"/>
+                <font ng-show="docform.file_name.$invalid" color="red">不能超过20个字符</font>
+            </td>
                 <td>立项时间</td><td><input type="text"  class="form-control datepicker" ng-model="date_opened"/></td>
                 <td>更新时间</td><td><input type="text"  class="form-control datepicker" ng-model="last_updated"/></td>
 
             </tr>
             <tr>
-                <td>行业</td><td><input type="text" class="form-control" ng-model="industry"/></td>
-                <td>地域</td><td><input type="text" class="form-control" ng-model="region"/></td>
+                <td>行业</td><td><input type="text" class="form-control" name="industry" ng-model="industry" ng-maxlength="20"/>
+                    <font ng-show="docform.industry.$invalid" color="red">不能超过20个字符</font>
+            </td>
+                <td>地域</td><td><input type="text" class="form-control" name="region" ng-model="region" ng-maxlength="20"/>
+                <font ng-show="docform.region.$invalid" color="red">不能超过20个字符</font>
+            </td>
                 <td>发展阶段</td><td>
                     <select class="form-control" ng-model="stage" ng-options="item.id as item.label for item in stage_options">
                     </select>
-                    <input type="text" class="form-control" ng-model="stage_free" ng-hide="stage != 999"/>
+                    <input type="text" class="form-control" ng-model="stage_free" name="stage_free" ng-hide="stage != 999" ng-maxlength="20"/>
+                    <font ng-show="docform.stage_free.$invalid" color="red">不能超过20个字符</font>
             </td>
             </tr>
             <tr>
                 <td>公司概况</td>
-                <td colspan="5"><input type="text" class="form-control" ng-model="company_info"/></td>
+                <td colspan="5"><input type="text" class="form-control" name="company_info" ng-model="company_info" ng-maxlength="100"/>
+<font ng-show="docform.company_info.$invalid" color="red">不能超过100个字符</font>
+                </td>
             </tr>
             <tr>
                  <td>融资规模</td><td><select class="form-control" ng-model="money_type_1" ng-options="item.id as item.label for item in money_type_options"></select>
                  <input type="text" class="form-control" ng-model="money_type_1_free" ng-hide="money_type_1 != 999"/>
-                 <input type="text" class="form-control" ng-model="raising_target"/>M</td>
+                 <input type="number" class="form-control" name="raising_target" ng-model="raising_target"/>M</td>
+    
                  <td>投前估值</td><td><select class="form-control" ng-model="money_type_2" ng-options="item.id as item.label for item in money_type_options"></select>
                  <input type="text" class="form-control" ng-model="money_type_2_free" ng-hide="money_type_2 != 999"/>
-                 <input type="text" class="form-control" ng-model="pre_money"/>M</td>
+                 <input type="number" class="form-control" ng-model="pre_money"/>M</td>
                  <td>投资类型</td><td><select class="form-control" ng-model="investment_type" ng-options="item.id as item.label for item in investment_type_options"/>
                     <input type="text" class="form-control" ng-model="investment_type_free" ng-hide="investment_type != 999"/>
                 </td>
@@ -216,4 +227,5 @@
             </div>
         </div>
     </div>
+</form>
 </div>

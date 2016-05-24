@@ -213,6 +213,10 @@ EventMember.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 }]);
 
 EventMember.run(['$rootScope', '$state', 'setting', function($rootScope, $state, setting) {
+        $rootScope.$on('$routeChangeStart', function(next, current) { 
+        console.log(next);
+        console.log(current);
+     });
     $rootScope.$state = $state;
     $rootScope.setting = setting;
 }]);
